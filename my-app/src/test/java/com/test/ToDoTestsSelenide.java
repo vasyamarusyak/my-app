@@ -1,4 +1,4 @@
-package com.mycompany.app;
+package com.test;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
