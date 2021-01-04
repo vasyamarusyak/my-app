@@ -1,6 +1,6 @@
 package com.steps;
 
-import com.Page.VuePage;
+import com.pages.VuePage;
 import org.testng.Assert;
 
 public class VuePageSteps extends VuePage {
