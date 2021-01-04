@@ -6,16 +6,14 @@ import org.testng.annotations.BeforeMethod;
 import static com.codeborne.selenide.Selenide.clearBrowserLocalStorage;
 import static com.codeborne.selenide.Selenide.open;
 
-public class MainClass {
-    public static SelenidePom selenidePom = new SelenidePom();
-
+public interface MainClass {
     @BeforeMethod
-    public void setUp() {
+    default void setUp() {
         open("http://todomvc.com/examples/vue/");
     }
 
     @AfterMethod
-    public void tearDown() {
+    default void tearDown() {
         clearBrowserLocalStorage();
     }
 }

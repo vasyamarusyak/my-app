@@ -1,4 +1,4 @@
-package com.test;
+package deprecated;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -37,10 +37,9 @@ public class ToDoTestsSelenide {
     @Test
     public void getQuantityOfTasks() {
         addItemsToDo();
-        results = $$(listOfTasks).size();
+        int results = $$(listOfTasks).size();
         //System.out.println("Quantity of tasks is " + results);
         Assert.assertTrue(results > 0,"There are not any tasks");
-        System.out.println();
     }
 
     @Test
