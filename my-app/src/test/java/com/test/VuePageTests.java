@@ -1,19 +1,33 @@
-package com.frameworkjava;
+package com.test;
 
+import com.steps.VuePageSteps;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.clearBrowserLocalStorage;
 import static com.codeborne.selenide.Selenide.open;
 
-public interface MainClass {
+
+public class VuePageTests extends VuePageSteps {
     @BeforeMethod
-    default void setUp() {
+    public void setUp() {
         open("http://todomvc.com/examples/vue/");
     }
 
     @AfterMethod
-    default void tearDown() {
+    public void tearDown() {
         clearBrowserLocalStorage();
     }
+
+    @Test
+    public void DeletationTaskTest() {
+        deleteTaskSteps();
+    }
+
+    @Test
+    public void compareQuantity() { comparingTaskSteps();
+    }
 }
+
+
