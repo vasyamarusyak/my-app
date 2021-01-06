@@ -23,14 +23,11 @@ public class VuePageTests {
     }
 
     @Test
-    public void deletationTaskTest() {
-        vuePageSteps.verifyDeletationOfTasks();
-    }
-
-    @Test
-    public void compareQuantityOfTasksAfterDeletationTest() {
-        vuePageSteps.verifyDeletationOfTasks();
+    public void verifyQuantityOfTasksAfterDeletationTest(){
+        vuePageSteps.addTasksStep(6);
         vuePageSteps.verifyQuantityOfTasks();
+        vuePageSteps.deleteTasksStep();
+        vuePageSteps.verifyDeletationOfTasks();
     }
 }
 

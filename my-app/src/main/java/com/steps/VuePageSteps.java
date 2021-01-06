@@ -6,19 +6,29 @@ import org.testng.Assert;
 public class VuePageSteps {
     public VuePage vuePage = new VuePage();
 
-    public void verifyDeletationOfTasks() {
-        int taskNumber = 5;
-        for (int i = 0; i < taskNumber; i++) {
-            vuePage.addTasks();
+    public VuePageSteps addTasksStep(int numberOfTasks) throws IllegalArgumentException {
+        if(numberOfTasks <= 0) {
+            throw new IllegalArgumentException("Nubmer of tasks should be greather than zero : " + numberOfTasks);
+        }else {
+            for (int i = 0; i < numberOfTasks; i++) {
+                vuePage.addTasks();
+            }
         }
+        return this;
+    }
+
+    public VuePageSteps deleteTasksStep(){
+        vuePage.deleteTask();
+        return this;
+    }
+
+    public void verifyDeletationOfTasks() {
         int resultsBeforeDel = vuePage.getQuantityOfTasks();
         vuePage.deleteTask();
-        int resultsAfterDel = vuePage.getQuantityOfTasks();
-        Assert.assertNotEquals(resultsBeforeDel, resultsAfterDel, "Task is not deleted");
+        Assert.assertNotEquals(resultsBeforeDel, vuePage.getQuantityOfTasks(), "Task is not deleted");
     }
 
     public void verifyQuantityOfTasks() {
-        vuePage.addTasks();
         Assert.assertEquals(vuePage.getQuantityOfTasks(), vuePage.getButtomQuantityOfTasks(), "Quantity is not equal");
     }
 }
