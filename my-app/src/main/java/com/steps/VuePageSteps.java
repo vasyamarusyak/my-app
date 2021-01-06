@@ -11,14 +11,14 @@ public class VuePageSteps {
         for (int i = 0; i < taskNumber; i++) {
             vuePage.addTasks();
         }
-            int resultsBeforeDel = vuePage.getQuantityOfTasks();
-            vuePage.deleteTask();
-            int resultsAfterDel = vuePage.getQuantityOfTasks();
+        int resultsBeforeDel = vuePage.getQuantityOfTasks();
+        vuePage.deleteTask();
+        int resultsAfterDel = vuePage.getQuantityOfTasks();
         Assert.assertNotEquals(resultsBeforeDel, resultsAfterDel, "Task is not deleted");
     }
 
     public void verifyQuantityOfTasks() {
         vuePage.addTasks();
-        Assert.assertEquals(vuePage.getQuantityOfTasks(),vuePage.getButtomQuantityOfTasks(), "Quantity is not equal");
+        Assert.assertEquals(vuePage.getQuantityOfTasks(), vuePage.getButtomQuantityOfTasks(), "Quantity is not equal");
     }
 }

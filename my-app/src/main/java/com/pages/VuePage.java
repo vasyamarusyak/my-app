@@ -27,6 +27,7 @@ public class VuePage {
         int quantity = Integer.parseInt($(quantityOfElements).getText());
         return quantity;
     }
+
     public VuePage deleteTask() {
         Selenide.actions().moveToElement(firstTaskField).perform();
         $(deleteButton).click();
