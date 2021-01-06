@@ -3,21 +3,22 @@ package com.steps;
 import com.pages.VuePage;
 import org.testng.Assert;
 
-public class VuePageSteps extends VuePage {
+public class VuePageSteps {
     public VuePage vuePage = new VuePage();
 
-    public void deleteTaskSteps() {
-        vuePage.addTasks();
-        vuePage.getQuantityOfTasks();
-        vuePage.deleteTask();
-        vuePage.isTaskDeleted();
-        Assert.assertTrue((isTaskDeleted()), "Task is not deleted");
+    public void verifyDeletationOfTasks() {
+        int taskNumber = 5;
+        for (int i = 0; i < taskNumber; i++) {
+            vuePage.addTasks();
+        }
+            int resultsBeforeDel = vuePage.getQuantityOfTasks();
+            vuePage.deleteTask();
+            int resultsAfterDel = vuePage.getQuantityOfTasks();
+        Assert.assertNotEquals(resultsBeforeDel, resultsAfterDel, "Task is not deleted");
     }
 
-    public void comparingTaskSteps() {
+    public void verifyQuantityOfTasks() {
         vuePage.addTasks();
-        vuePage.getQuantityOfTasks();
-        vuePage.getButtomQuantityOfTasks();
-        Assert.assertTrue(comparingTasksNumbers(), "Quantity is not equal");
+        Assert.assertEquals(vuePage.getQuantityOfTasks(),vuePage.getButtomQuantityOfTasks(), "Quantity is not equal");
     }
 }

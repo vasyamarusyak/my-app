@@ -14,18 +14,8 @@ public class VuePage {
     private SelenideElement quantityOfElements = $x("//span[@class='todo-count']/strong");
 
     public VuePage addTasks() {
-        int taskNumber = 5;
-        for (int i = 0; i < taskNumber; i++) {
-            $(addingField).val("Task " + i).pressEnter();
-        }
+        $(addingField).val("Task ").pressEnter();
         return this;
-    }
-
-    public boolean stateOfTaskField() {
-        if (listOfTasks.isEmpty()) {
-            return false;
-        } else
-            return true;
     }
 
     public int getQuantityOfTasks() {
@@ -33,32 +23,14 @@ public class VuePage {
         return quantity;
     }
 
-    public VuePage deleteTask() {
-        Selenide.actions().moveToElement(firstTaskField).perform();
-        $(deleteButton).click();
-        return this;
-    }
-
-    public boolean isTaskDeleted() {
-        int resultsBeforeDel = $$(listOfTasks).size();
-        deleteTask();
-        int resultsAfterDel = $$(listOfTasks).size();
-        if (resultsBeforeDel - 1 == resultsAfterDel) {
-            return true;
-        }
-        return false;
-    }
-
     public int getButtomQuantityOfTasks() {
         int quantity = Integer.parseInt($(quantityOfElements).getText());
         return quantity;
     }
-
-    public boolean comparingTasksNumbers() {
-        if (getQuantityOfTasks() == getButtomQuantityOfTasks()) {
-            return true;
-        }
-        return false;
+    public VuePage deleteTask() {
+        Selenide.actions().moveToElement(firstTaskField).perform();
+        $(deleteButton).click();
+        return this;
     }
 }
 
