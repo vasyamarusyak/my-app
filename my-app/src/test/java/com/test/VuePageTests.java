@@ -23,10 +23,9 @@ public class VuePageTests {
     }
 
     @Test
-    public void verifyQuantityOfTasksAfterDeletationTest(){
-        vuePageSteps.addTasksStep(6);
+    public void verifyQuantityOfTasksAfterDeletationTest() {
+        vuePageSteps.addTasks(vuePageSteps.taskNames);
         vuePageSteps.verifyQuantityOfTasks();
-        vuePageSteps.deleteTasksStep();
         vuePageSteps.verifyDeletationOfTasks();
     }
 }

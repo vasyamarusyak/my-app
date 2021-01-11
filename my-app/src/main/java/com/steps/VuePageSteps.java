@@ -2,29 +2,30 @@ package com.steps;
 
 import com.pages.VuePage;
 import org.testng.Assert;
+import java.util.ArrayList;
 
 public class VuePageSteps {
     public VuePage vuePage = new VuePage();
+    public ArrayList<String> taskNames = new ArrayList<>();
 
-    public VuePageSteps addTasksStep(int numberOfTasks) throws IllegalArgumentException {
-        if(numberOfTasks <= 0) {
-            throw new IllegalArgumentException("Nubmer of tasks should be greather than zero : " + numberOfTasks);
-        }else {
-            for (int i = 0; i < numberOfTasks; i++) {
-                vuePage.addTasks();
-            }
+    public VuePageSteps addTasks(ArrayList<String> taskNames) {
+        taskNames.add("task 0");
+        taskNames.add("task 1");
+        taskNames.add("task 2");
+        for (int i = 0; i < taskNames.size(); i++) {
+            vuePage.addTasks(taskNames.get(i));
         }
         return this;
     }
 
-    public VuePageSteps deleteTasksStep(){
-        vuePage.deleteTask();
+    public VuePageSteps deleteTask() {
+        vuePage.deleteTask("");
         return this;
     }
 
     public void verifyDeletationOfTasks() {
         int resultsBeforeDel = vuePage.getQuantityOfTasks();
-        vuePage.deleteTask();
+        vuePage.deleteTask("task 0");
         Assert.assertNotEquals(resultsBeforeDel, vuePage.getQuantityOfTasks(), "Task is not deleted");
     }
 
