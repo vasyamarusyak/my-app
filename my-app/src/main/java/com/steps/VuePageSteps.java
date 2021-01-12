@@ -2,34 +2,42 @@ package com.steps;
 
 import com.pages.VuePage;
 import org.testng.Assert;
+
 import java.util.ArrayList;
 
 public class VuePageSteps {
     public VuePage vuePage = new VuePage();
-    public ArrayList<String> taskNames = new ArrayList<>();
 
-    public VuePageSteps addTasks(ArrayList<String> taskNames) {
-        taskNames.add("task 0");
-        taskNames.add("task 1");
-        taskNames.add("task 2");
-        for (int i = 0; i < taskNames.size(); i++) {
-            vuePage.addTasks(taskNames.get(i));
+    public VuePageSteps addTask(ArrayList<String> taskNames) {
+        for (String item : taskNames) {
+            vuePage.addTask(item);
         }
         return this;
     }
 
-    public VuePageSteps deleteTask() {
-        vuePage.deleteTask("");
+    public VuePageSteps deleteTask(String taskName) {
+        vuePage.deleteTask(taskName);
         return this;
     }
 
-    public void verifyDeletationOfTasks() {
-        int resultsBeforeDel = vuePage.getQuantityOfTasks();
-        vuePage.deleteTask("task 0");
+    public void verifyDeletationOfTasks(int resultsBeforeDel, String nameOfDeletedTask) {
+        deleteTask(nameOfDeletedTask);
         Assert.assertNotEquals(resultsBeforeDel, vuePage.getQuantityOfTasks(), "Task is not deleted");
     }
 
-    public void verifyQuantityOfTasks() {
-        Assert.assertEquals(vuePage.getQuantityOfTasks(), vuePage.getButtomQuantityOfTasks(), "Quantity is not equal");
+    public void verifyQuantityOfTasks(int quantityBeforeActions, String taskName) {
+        vuePage.deleteTask(taskName);
+        Assert.assertTrue(quantityBeforeActions > vuePage.getQuantityOfTasks(), "Increased or stayed equals");
     }
+
+    public void verifyQuantityOfActiveTasks(String taskName) {
+        vuePage.showActiveTask();
+        int quantityBeforeCheckTask = vuePage.getQuantityOfTasks();
+        vuePage.showAllTask();
+        vuePage.checkTask(taskName);
+        vuePage.showActiveTask();
+        Assert.assertTrue(quantityBeforeCheckTask > vuePage.getQuantityOfTasks(), "Decreased or stayed equals");
+    }
+
+
 }
